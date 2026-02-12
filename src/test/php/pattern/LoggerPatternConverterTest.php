@@ -74,30 +74,30 @@ class LoggerPatternConverterTest extends PHPUnit_Framework_TestCase {
 	public function testDate() {
 		$converter = new LoggerPatternConverterDate($this->info, 'c');
 		$actual = $converter->convert($this->event);
-		$expected = date('c', $this->event->getTimeStamp());
+		$expected = date('c', (int) $this->event->getTimeStamp());
 		self::assertSame($expected, $actual);
 
 		// Format defaults to 'c'
 		$converter = new LoggerPatternConverterDate($this->info);
 		$actual = $converter->convert($this->event);
-		$expected = date('c', $this->event->getTimeStamp());
+		$expected = date('c', (int) $this->event->getTimeStamp());
 		self::assertSame($expected, $actual);
 		
 		$converter = new LoggerPatternConverterDate($this->info, '');
 		$actual = $converter->convert($this->event);
-		$expected = date('c', $this->event->getTimeStamp());
+		$expected = date('c', (int) $this->event->getTimeStamp());
 		self::assertSame($expected, $actual);
 
 		// Test ABSOLUTE
 		$converter = new LoggerPatternConverterDate($this->info, 'ABSOLUTE');
 		$actual = $converter->convert($this->event);
-		$expected = date('H:i:s', $this->event->getTimeStamp());
+		$expected = date('H:i:s', (int) $this->event->getTimeStamp());
 		self::assertSame($expected, $actual);
 
 		// Test DATE
 		$converter = new LoggerPatternConverterDate($this->info, 'DATE');
 		$actual = $converter->convert($this->event);
-		$expected = date('d M Y H:i:s.', $this->event->getTimeStamp());
+		$expected = date('d M Y H:i:s.', (int) $this->event->getTimeStamp());
 
 		$timestamp = $this->event->getTimeStamp();
 		$ms = floor(($timestamp - floor($timestamp)) * 1000);

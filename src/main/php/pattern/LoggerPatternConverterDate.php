@@ -71,7 +71,7 @@ class LoggerPatternConverterDate extends LoggerPatternConverter {
 		if ($this->useLocalDate) {
 			return $this->date($this->format, $event->getTimeStamp());
 		}
-		return date($this->format, $event->getTimeStamp());
+		return date($this->format, (int) $event->getTimeStamp());
 	}
 	
 	/**
@@ -86,6 +86,6 @@ class LoggerPatternConverterDate extends LoggerPatternConverter {
 		$ms = floor(($utimestamp - $timestamp) * 1000);
 		$ms = str_pad($ms, 3, '0', STR_PAD_LEFT);
 	
-		return date(preg_replace('`(?<!\\\\)u`', $ms, $format), $timestamp);
+		return date(preg_replace('`(?<!\\\\)u`', $ms, $format), (int) $timestamp);
 	}
 }
