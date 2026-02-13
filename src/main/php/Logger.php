@@ -66,6 +66,9 @@ class Logger {
 	/** A collection of appenders linked to this logger. */
 	private $appenders = array();
 
+	/** @var array The log4php Global Context */
+	public static array $GlobalContext = [];
+
 	/**
 	 * Constructor.
 	 * @param string $name Name of the logger.	  

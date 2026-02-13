@@ -151,7 +151,8 @@ class LoggerConfigurationAdapterXML implements LoggerConfigurationAdapter
 		}
 		
 		return $layout;
-	}
+	}
+
 	/** Parses any <param> child nodes returning them in an array. */
 	private function parseParameters($paramsNode) {
 		$params = array();
@@ -268,7 +269,26 @@ class LoggerConfigurationAdapterXML implements LoggerConfigurationAdapter
 	// ******************************************
 	
 	private function getAttributeValue(SimpleXMLElement $node, $name) {
-		return isset($node[$name]) ? (string) $node[$name] : null;
+		if ( !isset($node[$name]) )
+			return null;
+
+		$attr = (string) $node[$name];
+		// Find and replace "%property{..}" parts
+		if ( preg_match_all('/%property{(.+?)}/', $attr, $matches, PREG_SET_ORDER) > 0 ) {
+			foreach ( $matches as $matchItem ) {
+				$propertyName = $matchItem[1];
+				if ( !$propertyName )
+					continue;
+
+				$replacement = Logger::$GlobalContext[$propertyName];
+				if ( !$replacement )
+					continue;
+
+				$attr = str_replace($matchItem[0], $replacement, $attr);
+			}
+		}
+
+		return $attr;
 	}
 	
 	private function warn($message) {
