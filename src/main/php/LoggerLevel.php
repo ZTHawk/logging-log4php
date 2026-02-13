@@ -81,9 +81,9 @@ class LoggerLevel {
 			if($this->level == $other->level) {
 				return true;
 			}
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 	
 	/**

@@ -111,6 +111,7 @@ class LoggerAppenderFile extends LoggerAppender {
 		
 		// Write the header
 		$this->write($this->layout->getHeader());
+		return true;
 	}
 	
 	/**
@@ -156,7 +157,6 @@ class LoggerAppenderFile extends LoggerAppender {
 		if (empty($this->file)) {
 			$this->warn("Required parameter 'file' not set. Closing appender.");
 			$this->closed = true;
-			return;
 		}
 	}
 	

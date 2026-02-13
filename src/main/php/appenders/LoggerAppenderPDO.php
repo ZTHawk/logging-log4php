@@ -226,7 +226,7 @@ class LoggerAppenderPDO extends LoggerAppender {
 	}
 	
 	/** Returns the username. */
-	public function getUser($user) {
+	public function getUser( ) {
 		return $this->user;
 	}
 	
@@ -236,7 +236,7 @@ class LoggerAppenderPDO extends LoggerAppender {
 	}
 	
 	/** Returns the password. */
-	public function getPassword($password) {
+	public function getPassword( ) {
 		return $this->password;
 	}
 	
@@ -246,7 +246,7 @@ class LoggerAppenderPDO extends LoggerAppender {
 	}
 	
 	/** Returns the insert SQL. */
-	public function getInsertSQL($sql) {
+	public function getInsertSQL( ) {
 		return $this->insertSQL;
 	}
 
@@ -256,7 +256,7 @@ class LoggerAppenderPDO extends LoggerAppender {
 	}
 	
 	/** Returns the insert pattern. */
-	public function getInsertPattern($pattern) {
+	public function getInsertPattern( ) {
 		return $this->insertPattern;
 	}
 
@@ -266,7 +266,7 @@ class LoggerAppenderPDO extends LoggerAppender {
 	}
 	
 	/** Returns the table name. */
-	public function getTable($table) {
+	public function getTable( ) {
 		return $this->table;
 	}
 	
@@ -277,6 +277,6 @@ class LoggerAppenderPDO extends LoggerAppender {
 	
 	/** Returns the DSN string. */
 	public function getDSN($dsn) {
-		return $this->setString('dsn', $dsn);
+		return $this->dsn;
 	}	
 }

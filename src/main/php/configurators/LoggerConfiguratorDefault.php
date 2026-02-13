@@ -419,7 +419,7 @@ class LoggerConfiguratorDefault implements LoggerConfigurator
 		// Set logger additivity
 		if (isset($config['additivity'])) {
 			try {
-				$additivity = LoggerOptionConverter::toBooleanEx($config['additivity'], null);
+				$additivity = LoggerOptionConverter::toBooleanEx($config['additivity']);
 				$logger->setAdditivity($additivity);
 			} catch ( Exception ) {
 				$this->warn("Invalid additivity value [{$config['additivity']}] specified for logger [$loggerName]. Ignoring additivity setting.");

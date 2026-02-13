@@ -63,7 +63,6 @@ class LoggerAppenderDailyFile extends LoggerAppenderFile {
 		if (empty($this->datePattern)) {
 			$this->warn("Required parameter 'datePattern' not set. Closing appender.");
 			$this->closed = true;
-			return;
 		}
 	}
 

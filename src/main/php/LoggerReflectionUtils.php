@@ -48,7 +48,7 @@ class LoggerReflectionUtils {
 	 // TODO: check, if this is really useful
 	public static function setPropertiesByObject($obj, $properties, $prefix) {
 		$pSetter = new LoggerReflectionUtils($obj);
-		return $pSetter->setProperties($properties, $prefix);
+		$pSetter->setProperties($properties, $prefix);
 	}
 	
 	
@@ -100,7 +100,7 @@ class LoggerReflectionUtils {
 	 */
 	public function setProperty($name, $value) {
 		if($value === null) {
-			return;
+			return NULL;
 		}
 		
 		$method = "set" . ucfirst($name);
@@ -115,7 +115,9 @@ class LoggerReflectionUtils {
 	public function activate() {
 		if(method_exists($this->obj, 'activateoptions')) {
 			return call_user_func(array($this->obj, 'activateoptions'));
-		} 
+		}
+
+		return NULL;
 	}
 	
 	/**

@@ -47,6 +47,7 @@ abstract class LoggerPatternConverterSuperglobal extends LoggerPatternConverter 
 	protected $value = '';
 	
 	public function activateOptions( ) : void {
+		$key = '';
 		// Read the key from options array
 		if (isset($this->option) && $this->option !== '') {
 			$key = $this->option;

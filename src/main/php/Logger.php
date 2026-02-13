@@ -390,6 +390,8 @@ class Logger {
 				return $logger->getLevel();
 			}
 		}
+
+		return NULL;
 	}
   
 	/**
@@ -503,7 +505,7 @@ class Logger {
 	 * destructors.
 	 */
 	public static function shutdown() {
-		return self::getHierarchy()->shutdown();
+		self::getHierarchy()->shutdown();
 	}
 	
 	/**

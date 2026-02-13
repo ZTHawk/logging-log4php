@@ -75,7 +75,6 @@ class LoggerLayoutTTCC extends LoggerLayout {
 		if (!empty($dateFormat)) {
 			$this->dateFormat = $dateFormat;
 		}
-		return;
 	}
 
 	/**

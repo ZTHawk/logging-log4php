@@ -279,6 +279,7 @@ class LoggerAppenderSyslog extends LoggerAppender {
 	
 	/**
 	 * Parses the facility string and returns the corresponding int value.
+	 * @return int|mixed Default LOG_SYSLOG
 	 */
 	private function parseFacility() {
 		if (!empty($this->facility)) {   
@@ -289,10 +290,13 @@ class LoggerAppenderSyslog extends LoggerAppender {
 				trigger_error("log4php: Invalid syslog facility provided: $this->facility.", E_USER_WARNING);
 			}
 		}
+
+		return LOG_SYSLOG;
 	}
 
 	/**
  	 * Parses the priority string and returns the corresponding int value.
+	 * @return int|mixed Default LOG_DEBUG
  	 */
 	private function parsePriority() {
 		if (!empty($this->priority)) {
@@ -302,6 +306,8 @@ class LoggerAppenderSyslog extends LoggerAppender {
 			} else {
 				trigger_error("log4php: Invalid syslog priority provided: $this->priority.", E_USER_WARNING);
 			}
-		}	
+		}
+
+		return LOG_DEBUG;
 	}
 }

@@ -241,7 +241,7 @@ class LoggerAppenderRollingFile extends LoggerAppenderFile {
 		
 		if ($this->compress && !extension_loaded('zlib')) {
 			$this->warn("The 'zlib' extension is required for file compression. Disabling compression.");
-			$this->compression = false;
+			$this->compress = false;
 		}
 	}
 	
@@ -284,7 +284,7 @@ class LoggerAppenderRollingFile extends LoggerAppenderFile {
 	 */
 	public function setMaximumFileSize($maxFileSize) {
 		$this->warn("The 'maximumFileSize' parameter is deprecated. Use 'maxFileSize' instead.");
-		return $this->setMaxFileSize($maxFileSize);
+		$this->setMaxFileSize($maxFileSize);
 	}
 	
 	/**

@@ -88,7 +88,7 @@
 		} elseif ($value == self::STDERR || strtoupper($value) == 'STDERR') {
 			$this->target = self::STDERR;
 		} else {
-			$target = var_export($target);
+			$target = var_export($target, true);
 			$this->warn("Invalid value given for 'target' property: [$target]. Property not set.");
 		}
 	}
