@@ -31,13 +31,13 @@
 class LoggerConfiguratorDefault implements LoggerConfigurator
 {
 	/** XML configuration file format. */
-	const FORMAT_XML = 'xml';
+	const string FORMAT_XML = 'xml';
 	
 	/** PHP configuration file format. */
-	const FORMAT_PHP = 'php';
+	const string FORMAT_PHP = 'php';
 	
 	/** INI (properties) configuration file format. */
-	const FORMAT_INI = 'ini';
+	const string FORMAT_INI = 'ini';
 
 	/** Defines which adapter should be used for parsing which format. */
 	private $adapters = array(
@@ -141,7 +141,7 @@ class LoggerConfiguratorDefault implements LoggerConfigurator
 	 * returns it.
 	 *
 	 * @param string $url Path to the config file.
-	 * @return The configuration from the config file, as a PHP array.
+	 * @return array The configuration from the config file, as a PHP array.
 	 * @throws LoggerException If the configuration file cannot be loaded, or
 	 * 		if the parsing fails.
 	 */
@@ -162,21 +162,13 @@ class LoggerConfiguratorDefault implements LoggerConfigurator
 	private function getConfigType($url) {
 		$info = pathinfo($url);
 		$ext = strtolower($info['extension']);
-		
-		switch($ext) {
-			case 'xml':
-				return self::FORMAT_XML;
-			
-			case 'ini':
-			case 'properties':
-				return self::FORMAT_INI;
-			
-			case 'php':
-				return self::FORMAT_PHP;
-				
-			default:
-				throw new LoggerException("Unsupported configuration file extension: $ext");
-		}
+
+		return match ($ext) {
+        	'xml' => self::FORMAT_XML,
+        	'ini', 'properties' => self::FORMAT_INI,
+        	'php' => self::FORMAT_PHP,
+        	default => throw new LoggerException("Unsupported configuration file extension: $ext"),
+        };
 	}
 	
 	/**
@@ -429,7 +421,7 @@ class LoggerConfiguratorDefault implements LoggerConfigurator
 			try {
 				$additivity = LoggerOptionConverter::toBooleanEx($config['additivity'], null);
 				$logger->setAdditivity($additivity);
-			} catch (Exception $ex) {
+			} catch ( Exception ) {
 				$this->warn("Invalid additivity value [{$config['additivity']}] specified for logger [$loggerName]. Ignoring additivity setting.");
 			}
 		}
@@ -456,7 +448,7 @@ class LoggerConfiguratorDefault implements LoggerConfigurator
 	 * If required setters do not exist, it will produce a warning. 
 	 * 
 	 * @param mixed $object The object to configure.
-	 * @param unknown_type $options
+	 * @param array $options
 	 */
 	private function setOptions($object, $options) {
 		foreach($options as $name => $value) {

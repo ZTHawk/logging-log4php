@@ -218,7 +218,7 @@ class LoggerAppenderSyslog extends LoggerAppender {
 	}
 	
 	
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		$this->intPriority = $this->parsePriority();
 		$this->intOption   = $this->parseOption();
 		$this->intFacility = $this->parseFacility();
@@ -226,8 +226,8 @@ class LoggerAppenderSyslog extends LoggerAppender {
 		$this->closed = false;
 	}
 	
-	public function close() {
-		if($this->closed != true) {
+	public function close( ) : void {
+		if( !$this->closed ) {
 			closelog();
 			$this->closed = true;
 		}
@@ -245,7 +245,7 @@ class LoggerAppenderSyslog extends LoggerAppender {
 	public function append(LoggerLoggingEvent $event) {
 		$priority = $this->getSyslogPriority($event->getLevel());
 		$message = $this->layout->format($event);
-	
+
 		openlog($this->ident, $this->intOption, $this->intFacility);
 		syslog($priority, $message);
 		closelog();
@@ -270,33 +270,37 @@ class LoggerAppenderSyslog extends LoggerAppender {
 				if (defined($constant)) {
 					$value |= constant($constant);
 				} else {
-					trigger_error("log4php: Invalid syslog option provided: $option. Whole option string: {$this->option}.", E_USER_WARNING);
+					trigger_error("log4php: Invalid syslog option provided: $option. Whole option string: $this->option.", E_USER_WARNING);
 				}
 			}
 		}
 		return $value;
 	}
 	
-	/** Parses the facility string and returns the corresponding int value. */
+	/**
+	 * Parses the facility string and returns the corresponding int value.
+	 */
 	private function parseFacility() {
 		if (!empty($this->facility)) {   
 			$constant = "LOG_" . trim($this->facility);
 			if (defined($constant)) {
 				return constant($constant);
 			} else {
-				trigger_error("log4php: Invalid syslog facility provided: {$this->facility}.", E_USER_WARNING);
+				trigger_error("log4php: Invalid syslog facility provided: $this->facility.", E_USER_WARNING);
 			}
 		}
 	}
 
-	/** Parses the priority string and returns the corresponding int value. */
+	/**
+ 	 * Parses the priority string and returns the corresponding int value.
+ 	 */
 	private function parsePriority() {
 		if (!empty($this->priority)) {
 			$constant = "LOG_" . trim($this->priority);
 			if (defined($constant)) {
 				return constant($constant);
 			} else {
-				trigger_error("log4php: Invalid syslog priority provided: {$this->priority}.", E_USER_WARNING);
+				trigger_error("log4php: Invalid syslog priority provided: $this->priority.", E_USER_WARNING);
 			}
 		}	
 	}

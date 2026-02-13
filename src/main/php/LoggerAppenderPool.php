@@ -61,7 +61,7 @@ class LoggerAppenderPool {
 	 *  exists in the pool.
 	 */
 	public static function get($name) {
-		return isset(self::$appenders[$name]) ? self::$appenders[$name] : null;
+		return self::$appenders[$name] ?? null;
 	}
 	
 	/**

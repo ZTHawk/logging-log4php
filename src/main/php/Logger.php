@@ -212,7 +212,7 @@ class Logger {
 	 * @param string $msg message to log
 	 */
 	public function assertLog($assertion = true, $msg = '') {
-		if($assertion == false) {
+		if(!$assertion) {
 			$this->error($msg);
 		}
 	}
@@ -382,9 +382,9 @@ class Logger {
 	/**
 	 * Starting from this Logger, search the Logger hierarchy for a non-null level and return it.
 	 * @see LoggerLevel
-	 * @return LoggerLevel or null
+	 * @return ?LoggerLevel
 	 */
-	public function getEffectiveLevel() {
+	public function getEffectiveLevel() : ?LoggerLevel {
 		for($logger = $this; $logger !== null; $logger = $logger->getParent()) {
 			if($logger->getLevel() !== null) {
 				return $logger->getLevel();
@@ -424,10 +424,10 @@ class Logger {
 	
 	/**
 	 * Sets the parent logger.
-	 * @param Logger $logger
+	 * @param Logger $parent
 	 */
-	public function setParent(Logger $logger) {
-		$this->parent = $logger;
+	public function setParent(Logger $parent) {
+		$this->parent = $parent;
 	} 
 	
 	// ******************************************

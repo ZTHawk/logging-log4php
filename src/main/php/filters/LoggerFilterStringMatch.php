@@ -74,14 +74,14 @@ class LoggerFilterStringMatch extends LoggerFilter {
 	/**
 	 * @return integer a {@link LOGGER_FILTER_NEUTRAL} is there is no string match.
 	 */
-	public function decide(LoggerLoggingEvent $event) {
+	public function decide( LoggerLoggingEvent $event ) : int {
 		$msg = $event->getRenderedMessage();
 		
 		if($msg === null or $this->stringToMatch === null) {
 			return LoggerFilter::NEUTRAL;
 		}
 		
-		if(strpos($msg, $this->stringToMatch) !== false ) {
+		if( str_contains($msg, $this->stringToMatch) ) {
 			return ($this->acceptOnMatch) ? LoggerFilter::ACCEPT : LoggerFilter::DENY;
 		}
 		return LoggerFilter::NEUTRAL;

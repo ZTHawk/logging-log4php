@@ -33,7 +33,7 @@ abstract class LoggerConfigurable {
 	protected function setBoolean($property, $value) {
 		try {
 			$this->$property = LoggerOptionConverter::toBooleanEx($value);
-		} catch (Exception $ex) {
+		} catch ( Exception ) {
 			$value = var_export($value, true);
 			$this->warn("Invalid value given for '$property' property: [$value]. Expected a boolean value. Property not changed.");
 		}
@@ -43,7 +43,7 @@ abstract class LoggerConfigurable {
 	protected function setInteger($property, $value) {
 		try {
 			$this->$property = LoggerOptionConverter::toIntegerEx($value);
-		} catch (Exception $ex) {
+		} catch ( Exception ) {
 			$value = var_export($value, true);
 			$this->warn("Invalid value given for '$property' property: [$value]. Expected an integer. Property not changed.");
 		}
@@ -53,7 +53,7 @@ abstract class LoggerConfigurable {
 	protected function setLevel($property, $value) {
 		try {
 			$this->$property = LoggerOptionConverter::toLevelEx($value);
-		} catch (Exception $ex) {
+		} catch ( Exception ) {
 			$value = var_export($value, true);
 			$this->warn("Invalid value given for '$property' property: [$value]. Expected a level value. Property not changed.");
 		}
@@ -63,7 +63,7 @@ abstract class LoggerConfigurable {
 	protected function setPositiveInteger($property, $value) {
 		try {
 			$this->$property = LoggerOptionConverter::toPositiveIntegerEx($value);
-		} catch (Exception $ex) {
+		} catch ( Exception ) {
 			$value = var_export($value, true);
 			$this->warn("Invalid value given for '$property' property: [$value]. Expected a positive integer. Property not changed.");
 		}
@@ -73,7 +73,7 @@ abstract class LoggerConfigurable {
 	protected function setFileSize($property, $value) {
 		try {
 			$this->$property = LoggerOptionConverter::toFileSizeEx($value);
-		} catch (Exception $ex) {
+		} catch ( Exception ) {
 			$value = var_export($value, true);
 			$this->warn("Invalid value given for '$property' property: [$value]. Expected a file size value.  Property not changed.");
 		}
@@ -83,7 +83,7 @@ abstract class LoggerConfigurable {
 	protected function setNumeric($property, $value) {
 		try {
 			$this->$property = LoggerOptionConverter::toNumericEx($value);
-		} catch (Exception $ex) {
+		} catch ( Exception ) {
 			$value = var_export($value, true);
 			$this->warn("Invalid value given for '$property' property: [$value]. Expected a number. Property not changed.");
 		}
@@ -101,7 +101,7 @@ abstract class LoggerConfigurable {
 			try {
 				$value = LoggerOptionConverter::toStringEx($value);
 				$this->$property = LoggerOptionConverter::substConstants($value);
-			} catch (Exception $ex) {
+			} catch ( Exception ) {
 				$value = var_export($value, true);
 				$this->warn("Invalid value given for '$property' property: [$value]. Expected a string. Property not changed.");
 			}

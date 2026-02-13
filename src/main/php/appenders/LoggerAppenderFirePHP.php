@@ -53,7 +53,7 @@ class LoggerAppenderFirePHP extends LoggerAppender {
 	 */
 	protected $target = 'page';
 
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		if (method_exists('FirePHP', 'to')) {
 			$this->console = FirePHP::to($this->target)->console();
 			$this->closed = false;

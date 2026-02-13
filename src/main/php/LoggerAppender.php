@@ -254,7 +254,7 @@ abstract class LoggerAppender extends LoggerConfigurable {
 	 * Derived appenders should override this method if option structure
 	 * requires it.
 	 */
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		$this->closed = false;
 	}
 	
@@ -278,8 +278,8 @@ abstract class LoggerAppender extends LoggerConfigurable {
 	}
 	
 	/** Triggers a warning for this logger with the given message. */
-	protected function warn($message) {
-		$id = get_class($this) . (empty($this->name) ? '' : ":{$this->name}");
+	protected function warn( $message ) : void {
+		$id = get_class($this) . (empty($this->name) ? '' : ":$this->name");
 		trigger_error("log4php: [$id]: $message", E_USER_WARNING);
 	}
 	

@@ -127,13 +127,13 @@ class LoggerLoggingEvent {
 		}
 		$this->level = $level;
 		$this->message = $message;
-		if($timeStamp !== null && is_numeric($timeStamp)) {
+		if( is_numeric($timeStamp) ) {
 			$this->timeStamp = $timeStamp;
 		} else {
 			$this->timeStamp = microtime(true);
 		}
 		
-		if ($throwable !== null && $throwable instanceof Throwable) {
+		if ( $throwable instanceof Throwable ) {
 			$this->throwableInfo = new LoggerThrowableInformation($throwable);
 		}
 	}
@@ -177,7 +177,7 @@ class LoggerLoggingEvent {
 				$prevHop = $hop;
 				$hop = array_pop($trace);
 			}
-			$locationInfo['class'] = isset($prevHop['class']) ? $prevHop['class'] : 'main';
+			$locationInfo['class'] = $prevHop['class'] ?? 'main';
 			if(isset($prevHop['function']) and
 				$prevHop['function'] !== 'include' and
 				$prevHop['function'] !== 'include_once' and

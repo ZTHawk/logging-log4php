@@ -54,7 +54,7 @@ class LoggerHierarchy {
 	
 	/** 
 	 * The root logger.
-	 * @var RootLogger 
+	 * @var LoggerRoot
 	 */
 	protected $root;
 	

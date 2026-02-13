@@ -45,7 +45,7 @@
 class LoggerAppenderRollingFile extends LoggerAppenderFile {
 
 	/** Compressing backup files is done in chunks, this determines how large. */
-	const COMPRESS_CHUNK_SIZE = 102400; // 100KB
+	const int COMPRESS_CHUNK_SIZE = 102400; // 100KB
 	
 	/**
 	 * The maximum size (in bytes) that the output file is allowed to reach 
@@ -194,7 +194,7 @@ class LoggerAppenderRollingFile extends LoggerAppenderFile {
 	 * Writes a string to the target file. Opens file if not already open.
 	 * @param string $string Data to write.
 	 */
-	protected function write($string) {
+	protected function write( $string ) : void {
 		// Lazy file open
 		if(!isset($this->fp)) {
 			if ($this->openFile() === false) {
@@ -236,7 +236,7 @@ class LoggerAppenderRollingFile extends LoggerAppenderFile {
 		}
 	}
 	
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		parent::activateOptions();
 		
 		if ($this->compress && !extension_loaded('zlib')) {

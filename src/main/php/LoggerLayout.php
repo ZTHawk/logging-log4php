@@ -68,7 +68,7 @@ abstract class LoggerLayout extends LoggerConfigurable {
 	}
 	
 	/** Triggers a warning for this layout with the given message. */
-	protected function warn($message) {
+	protected function warn( $message ) : void {
 		trigger_error("log4php: [" . get_class($this) . "]: $message", E_USER_WARNING);
 	}
 }

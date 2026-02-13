@@ -86,7 +86,7 @@ class LoggerFilterLevelMatch extends LoggerFilter {
 	 * @param LoggerLoggingEvent $event
 	 * @return integer
 	 */
-	public function decide(LoggerLoggingEvent $event) {
+	public function decide( LoggerLoggingEvent $event ) : int {
 		if($this->levelToMatch === null) {
 			return LoggerFilter::NEUTRAL;
 		}

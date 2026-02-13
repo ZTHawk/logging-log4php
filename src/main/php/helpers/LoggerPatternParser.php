@@ -34,7 +34,7 @@
 class LoggerPatternParser {
 
 	/** Escape character for conversion words in the conversion pattern. */
-	const ESCAPE_CHAR = '%';
+	const string ESCAPE_CHAR = '%';
 	
 	/** Maps conversion words to relevant converters. */
 	private $converterMap;

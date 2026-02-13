@@ -160,7 +160,7 @@ class LoggerRendererMap {
 	 * If no renderer could be found, returns NULL.
 	 *
 	 * @param string $class
-	 * @return LoggerRendererObject Or null if not found.
+	 * @return ?LoggerRenderer LoggerRendererObject Or null if not found.
 	 */
 	public function getByClassName($class) {
 		for(; !empty($class); $class = get_parent_class($class)) {

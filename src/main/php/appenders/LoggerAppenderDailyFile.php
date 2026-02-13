@@ -57,7 +57,7 @@ class LoggerAppenderDailyFile extends LoggerAppenderFile {
 	protected $currentDate;
 
 	/** Additional validation for the date pattern. */
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		parent::activateOptions();
 	
 		if (empty($this->datePattern)) {
@@ -108,7 +108,7 @@ class LoggerAppenderDailyFile extends LoggerAppenderFile {
 	/**
 	 * Determines target file. Replaces %s in file path with a date. 
 	 */
-	protected function getTargetFile() {
+	protected function getTargetFile( ) : array|string {
 		return str_replace('%s', $this->currentDate, $this->file);
 	}
 	

@@ -33,10 +33,10 @@
 class LoggerLayoutPattern extends LoggerLayout {
 	
 	/** Default conversion pattern */
-	const DEFAULT_CONVERSION_PATTERN = '%date %-5level %logger %message%newline';
+	const string DEFAULT_CONVERSION_PATTERN = '%date %-5level %logger %message%newline';
 
 	/** Default conversion TTCC Pattern */
-	const TTCC_CONVERSION_PATTERN = '%d [%t] %p %c %x - %m%n';
+	const string TTCC_CONVERSION_PATTERN = '%d [%t] %p %c %x - %m%n';
 
 	/** The conversion pattern. */ 
 	protected $pattern = self::DEFAULT_CONVERSION_PATTERN;
@@ -144,7 +144,7 @@ class LoggerLayoutPattern extends LoggerLayout {
 	 * Processes the conversion pattern and creates a corresponding chain of 
 	 * pattern converters which will be used to format logging events. 
 	 */
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		if (!isset($this->pattern)) {
 			throw new LoggerException("Mandatory parameter 'conversionPattern' is not set.");
 		}
@@ -159,7 +159,7 @@ class LoggerLayoutPattern extends LoggerLayout {
 	 * @param LoggerLoggingEvent $event
 	 * @return string
 	 */
-	public function format(LoggerLoggingEvent $event) {
+	public function format( LoggerLoggingEvent $event ) : string {
 		$sbuf = '';
 		$converter = $this->head;
 		while ($converter !== null) {

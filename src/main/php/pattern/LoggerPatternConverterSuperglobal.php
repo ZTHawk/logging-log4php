@@ -46,7 +46,7 @@ abstract class LoggerPatternConverterSuperglobal extends LoggerPatternConverter 
 	
 	protected $value = '';
 	
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		// Read the key from options array
 		if (isset($this->option) && $this->option !== '') {
 			$key = $this->option;
@@ -73,7 +73,7 @@ abstract class LoggerPatternConverterSuperglobal extends LoggerPatternConverter 
 		// Check the given superglobal exists. It is possible that it is not initialized.
 		if (!isset(${$this->name})) {
 			$class = get_class($this);
-			trigger_error("log4php: $class: Cannot find superglobal variable \${$this->name}.", E_USER_WARNING);
+			trigger_error("log4php: $class: Cannot find superglobal variable \$$this->name.", E_USER_WARNING);
 			return;
 		}
 		

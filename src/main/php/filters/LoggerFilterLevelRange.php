@@ -106,11 +106,11 @@ class LoggerFilterLevelRange extends LoggerFilter {
 	 * @param LoggerLoggingEvent $event
 	 * @return integer
 	 */
-	public function decide(LoggerLoggingEvent $event) {
+	public function decide( LoggerLoggingEvent $event ) : int {
 		$level = $event->getLevel();
 		
 		if($this->levelMin !== null) {
-			if($level->isGreaterOrEqual($this->levelMin) == false) {
+			if( !$level->isGreaterOrEqual($this->levelMin) ) {
 				// level of event is less than minimum
 				return LoggerFilter::DENY;
 			}

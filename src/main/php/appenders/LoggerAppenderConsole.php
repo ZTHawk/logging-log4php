@@ -38,10 +38,10 @@
  class LoggerAppenderConsole extends LoggerAppender {
 
 	/** The standard otuput stream.  */
-	const STDOUT = 'php://stdout';
+	const string STDOUT = 'php://stdout';
 	
 	/** The standard error stream.*/
-	const STDERR = 'php://stderr';
+	const string STDERR = 'php://stderr';
 
 	/** The 'target' parameter. */
 	protected $target = self::STDOUT;
@@ -52,17 +52,17 @@
 	 */
 	protected $fp = null;
 
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		$this->fp = fopen($this->target, 'w');
 		if(is_resource($this->fp) && $this->layout !== null) {
 			fwrite($this->fp, $this->layout->getHeader());
 		}
-		$this->closed = (bool)is_resource($this->fp) === false;
+		$this->closed = is_resource($this->fp) === false;
 	}
 	
 	
-	public function close() {
-		if($this->closed != true) {
+	public function close( ) : void {
+		if( !$this->closed ) {
 			if (is_resource($this->fp) && $this->layout !== null) {
 				fwrite($this->fp, $this->layout->getFooter());
 				fclose($this->fp);

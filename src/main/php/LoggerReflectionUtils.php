@@ -68,12 +68,11 @@ class LoggerReflectionUtils {
 	public function setProperties($properties, $prefix) {
 		$len = strlen($prefix);
 		reset($properties);
-		while(list($key,) = each($properties)) {
-			if(strpos($key, $prefix) === 0) {
+		foreach ( $properties as $key => $value ) {
+			if(str_starts_with($key, $prefix)) {
 				if(strpos($key, '.', ($len + 1)) > 0) {
 					continue;
 				}
-				$value = $properties[$key];
 				$key = substr($key, $len);
 				if($key == 'layout' and ($this->obj instanceof LoggerAppender)) {
 					continue;
@@ -123,7 +122,7 @@ class LoggerReflectionUtils {
 	 * Creates an instances from the given class name.
 	 *
 	 * @param string $classname
-	 * @return an object from the class with the given classname
+	 * @return ?mixed an object from the class with the given classname
 	 */
 	public static function createObject($class) {
 		if(!empty($class)) {

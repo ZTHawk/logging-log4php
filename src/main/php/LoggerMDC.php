@@ -57,7 +57,7 @@ class LoggerMDC {
 	 * 	for given key.
 	 */
 	public static function get($key) {
-		return isset(self::$map[$key]) ? self::$map[$key] : '';
+		return self::$map[$key] ?? '';
 	}
 
 	/**

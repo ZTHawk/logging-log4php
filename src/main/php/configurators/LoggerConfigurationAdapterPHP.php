@@ -51,13 +51,13 @@
  */
 class LoggerConfigurationAdapterPHP implements LoggerConfigurationAdapter
 {
-	public function convert($url) {
-		if (!file_exists($url)) {
-			throw new LoggerException("File [$url] does not exist.");
+	public function convert( $path ) {
+		if (!file_exists($path)) {
+			throw new LoggerException("File [$path] does not exist.");
 		}
 		
 		// Load the config file
-		$data = @file_get_contents($url);
+		$data = @file_get_contents($path);
 		if ($data === false) {
 			$error = error_get_last();
 			throw new LoggerException("Error loading config file: {$error['message']}");

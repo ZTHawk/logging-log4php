@@ -53,11 +53,11 @@ class LoggerAppenderSocket extends LoggerAppender {
 	// ******************************************
 	
 	/** Override the default layout to use serialized. */
-	public function getDefaultLayout() {
+	public function getDefaultLayout( ) : LoggerLayoutSerialized {
 		return new LoggerLayoutSerialized();
 	}
 	
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		if (empty($this->remoteHost)) {
 			$this->warn("Required parameter [remoteHost] not set. Closing appender.");
 			$this->closed = true;
@@ -74,7 +74,7 @@ class LoggerAppenderSocket extends LoggerAppender {
 	public function append(LoggerLoggingEvent $event) {
 		$socket = fsockopen($this->remoteHost, $this->port, $errno, $errstr, $this->timeout);
 		if ($socket === false) {
-			$this->warn("Could not open socket to {$this->remoteHost}:{$this->port}. Closing appender.");
+			$this->warn("Could not open socket to $this->remoteHost:$this->port. Closing appender.");
 			$this->closed = true;
 			return;
 		}

@@ -110,7 +110,7 @@ class LoggerLayoutHtml extends LoggerLayout {
 	/**
 	 * @return string Returns the content type output by this layout, i.e "text/html".
 	 */
-	public function getContentType() {
+	public function getContentType( ) : string {
 		return "text/html";
 	}
 	
@@ -118,7 +118,7 @@ class LoggerLayoutHtml extends LoggerLayout {
 	 * @param LoggerLoggingEvent $event
 	 * @return string
 	 */
-	public function format(LoggerLoggingEvent $event) {
+	public function format( LoggerLoggingEvent $event ) : string {
 		$sbuf = PHP_EOL . "<tr>" . PHP_EOL;
 	
 		$sbuf .= "<td>";
@@ -170,7 +170,7 @@ class LoggerLayoutHtml extends LoggerLayout {
 	/**
 	 * @return string Returns appropriate HTML headers.
 	 */
-	public function getHeader() {
+	public function getHeader( ) : string {
 		$sbuf = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">" . PHP_EOL;
 		$sbuf .= "<html>" . PHP_EOL;
 		$sbuf .= "<head>" . PHP_EOL;
@@ -204,7 +204,7 @@ class LoggerLayoutHtml extends LoggerLayout {
 	/**
 	 * @return string Returns the appropriate HTML footers.
 	 */
-	public function getFooter() {
+	public function getFooter( ) : string {
 		$sbuf = "</table>" . PHP_EOL;
 		$sbuf .= "<br>" . PHP_EOL;
 		$sbuf .= "</body></html>";

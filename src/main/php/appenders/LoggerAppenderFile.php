@@ -152,7 +152,7 @@ class LoggerAppenderFile extends LoggerAppender {
 		}
 	}
 	
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		if (empty($this->file)) {
 			$this->warn("Required parameter 'file' not set. Closing appender.");
 			$this->closed = true;
@@ -160,7 +160,7 @@ class LoggerAppenderFile extends LoggerAppender {
 		}
 	}
 	
-	public function close() {
+	public function close( ) : void {
 		if (is_resource($this->fp)) {
 			$this->write($this->layout->getFooter());
 			fclose($this->fp);

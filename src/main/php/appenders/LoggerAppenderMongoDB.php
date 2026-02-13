@@ -47,22 +47,22 @@ class LoggerAppenderMongoDB extends LoggerAppender {
 	// ******************************************
 	
 	/** Default prefix for the {@link $host}. */	
-	const DEFAULT_MONGO_URL_PREFIX = 'mongodb://';
+	const string DEFAULT_MONGO_URL_PREFIX = 'mongodb://';
 	
 	/** Default value for {@link $host}, without a prefix. */
-	const DEFAULT_MONGO_HOST = 'localhost';
+	const string DEFAULT_MONGO_HOST = 'localhost';
 	
 	/** Default value for {@link $port} */
-	const DEFAULT_MONGO_PORT = 27017;
+	const int DEFAULT_MONGO_PORT = 27017;
 	
 	/** Default value for {@link $databaseName} */
-	const DEFAULT_DB_NAME = 'log4php_mongodb';
+	const string DEFAULT_DB_NAME = 'log4php_mongodb';
 	
 	/** Default value for {@link $collectionName} */
-	const DEFAULT_COLLECTION_NAME = 'logs';
+	const string DEFAULT_COLLECTION_NAME = 'logs';
 	
 	/** Default value for {@link $timeout} */
-	const DEFAULT_TIMEOUT_VALUE = 3000;
+	const int DEFAULT_TIMEOUT_VALUE = 3000;
 	
 	// ******************************************
 	// ** Configurable parameters              **
@@ -120,7 +120,7 @@ class LoggerAppenderMongoDB extends LoggerAppender {
 	 * Based on defined options, this method connects to the database and 
 	 * creates a {@link $collection}. 
 	 */
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		try {
 			$this->connection = new Mongo(sprintf('%s:%d', $this->host, $this->port), array('timeout' => $this->timeout));
 			$db	= $this->connection->selectDB($this->databaseName);
@@ -137,7 +137,7 @@ class LoggerAppenderMongoDB extends LoggerAppender {
 		} catch (InvalidArgumentException $ex) {
 			$this->closed = true;
 			$this->warn(sprintf('Error while selecting mongo database: %s', $ex->getMessage()));
-		} catch (Exception $ex) {
+		} catch ( Exception ) {
 			$this->closed = true;
 			$this->warn('Invalid credentials for mongo database authentication');
 		}
@@ -150,9 +150,7 @@ class LoggerAppenderMongoDB extends LoggerAppender {
 	 */
 	public function append(LoggerLoggingEvent $event) {
 		try {
-			if ($this->collection != null) {
-				$this->collection->insert($this->format($event));
-			}
+			$this->collection?->insert($this->format($event));
 		} catch (MongoCursorException $ex) {
 			$this->warn(sprintf('Error while writing to mongo collection: %s', $ex->getMessage()));
 		}
@@ -197,10 +195,10 @@ class LoggerAppenderMongoDB extends LoggerAppender {
 	 * 
 	 * Supports innner exceptions (PHP >= 5.3)
 	 * 
-	 * @param Exception $ex
+	 * @param Throwable $ex
 	 * @return array
 	 */
-	protected function formatThrowable(Exception $ex) {
+	protected function formatThrowable(Throwable $ex) {
 		$array = array(				
 			'message' => $ex->getMessage(),
 			'code' => $ex->getCode(),
@@ -217,8 +215,8 @@ class LoggerAppenderMongoDB extends LoggerAppender {
 	/**
 	 * Closes the connection to the logging database
 	 */
-	public function close() {
-		if($this->closed != true) {
+	public function close( ) : void {
+		if( !$this->closed ) {
 			$this->collection = null;
 			if ($this->connection !== null) {
 				$this->connection->close();

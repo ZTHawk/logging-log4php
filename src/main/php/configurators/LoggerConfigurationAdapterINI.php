@@ -33,25 +33,25 @@
 class LoggerConfigurationAdapterINI implements LoggerConfigurationAdapter {
 	
 	/** Name to assign to the root logger. */
-	const ROOT_LOGGER_NAME = "root";
+	const string ROOT_LOGGER_NAME = "root";
 
 	/** Prefix used for defining logger additivity. */
-	const ADDITIVITY_PREFIX = "log4php.additivity.";
+	const string ADDITIVITY_PREFIX = "log4php.additivity.";
 	
 	/** Prefix used for defining logger threshold. */
-	const THRESHOLD_PREFIX = "log4php.threshold";
+	const string THRESHOLD_PREFIX = "log4php.threshold";
 	
 	/** Prefix used for defining the root logger. */
-	const ROOT_LOGGER_PREFIX = "log4php.rootLogger";
+	const string ROOT_LOGGER_PREFIX = "log4php.rootLogger";
 	
 	/** Prefix used for defining a logger. */
-	const LOGGER_PREFIX = "log4php.logger.";
+	const string LOGGER_PREFIX = "log4php.logger.";
 	
 	/** Prefix used for defining an appender. */
-	const APPENDER_PREFIX = "log4php.appender.";
+	const string APPENDER_PREFIX = "log4php.appender.";
 	
 	/** Prefix used for defining a renderer. */
-	const RENDERER_PREFIX = "log4php.renderer.";
+	const string RENDERER_PREFIX = "log4php.renderer.";
 	
 	/** Holds the configuration. */
 	private $config = array();
@@ -95,8 +95,6 @@ class LoggerConfigurationAdapterINI implements LoggerConfigurationAdapter {
 		if (isset($properties[self::ROOT_LOGGER_PREFIX])) {
 			$this->parseLogger($properties[self::ROOT_LOGGER_PREFIX], self::ROOT_LOGGER_NAME);
 		}
-		
-		$appenders = array();
 		
 		foreach($properties as $key => $value) {
 			// Parse loggers

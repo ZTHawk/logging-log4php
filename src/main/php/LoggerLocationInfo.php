@@ -28,7 +28,7 @@
 class LoggerLocationInfo {
 	
 	/** The value to return when the location information is not available. */
-	const LOCATION_INFO_NA = 'NA';
+	const string LOCATION_INFO_NA = 'NA';
 	
 	/**
 	 * Caller line number.
@@ -65,12 +65,13 @@ class LoggerLocationInfo {
 	 *
 	 * @param array $trace
 	 * @param mixed $caller
+	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function __construct($trace, $fqcn = null) {
-		$this->lineNumber = isset($trace['line']) ? $trace['line'] : null;
-		$this->fileName = isset($trace['file']) ? $trace['file'] : null;
-		$this->className = isset($trace['class']) ? $trace['class'] : null;
-		$this->methodName = isset($trace['function']) ? $trace['function'] : null;
+		$this->lineNumber = $trace['line'] ?? null;
+		$this->fileName = $trace['file'] ?? null;
+		$this->className = $trace['class'] ?? null;
+		$this->methodName = $trace['function'] ?? null;
 		$this->fullInfo = $this->getClassName() . '.' . $this->getMethodName() . 
 			'(' . $this->getFileName() . ':' . $this->getLineNumber() . ')';
 	}

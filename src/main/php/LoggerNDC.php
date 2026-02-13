@@ -112,7 +112,7 @@ class LoggerNDC {
 
 	/**
 	 * Never use this method directly, use the {@link LoggerLoggingEvent::getNDC()} method instead.
-	 * @return array
+	 * @return string
 	 */
 	public static function get() {
 		return implode(' ', self::$stack);
@@ -170,7 +170,7 @@ class LoggerNDC {
 	 * @param string $message The new diagnostic context information.
 	 */
 	public static function push($message) {
-		array_push(self::$stack, (string)$message);
+		self::$stack[] = (string)$message;
 	}
 
 	/**

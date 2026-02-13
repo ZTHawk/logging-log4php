@@ -35,7 +35,7 @@ class LoggerPatternConverterClass extends LoggerPatternConverter {
 	/** Holds processed class names. */
 	private $cache = array();
 	
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		// Parse the option (desired output length)
 		if (isset($this->option) && is_numeric($this->option) && $this->option >= 0) {
 			$this->length = (integer) $this->option;

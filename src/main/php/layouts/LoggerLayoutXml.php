@@ -54,16 +54,16 @@
  * @subpackage layouts
  */
 class LoggerLayoutXml extends LoggerLayout {
-	const LOG4J_NS_PREFIX ='log4j';
-	const LOG4J_NS = 'http://jakarta.apache.org/log4j/';
+	const string LOG4J_NS_PREFIX ='log4j';
+	const string LOG4J_NS = 'http://jakarta.apache.org/log4j/';
 	
-	const LOG4PHP_NS_PREFIX = 'log4php';
-	const LOG4PHP_NS = 'http://logging.apache.org/log4php/';
+	const string LOG4PHP_NS_PREFIX = 'log4php';
+	const string LOG4PHP_NS = 'http://logging.apache.org/log4php/';
 	
-	const CDATA_START = '<![CDATA[';
-	const CDATA_END = ']]>';
-	const CDATA_PSEUDO_END = ']]&gt;';
-	const CDATA_EMBEDDED_END = ']]>]]&gt;<![CDATA[';
+	const string CDATA_START = '<![CDATA[';
+	const string CDATA_END = ']]>';
+	const string CDATA_PSEUDO_END = ']]&gt;';
+	const string CDATA_EMBEDDED_END = ']]>]]&gt;<![CDATA[';
 
 	/**
 	 * If set to true then the file name and line number of the origin of the
@@ -85,7 +85,7 @@ class LoggerLayoutXml extends LoggerLayout {
 	/** The namespace prefix in use */
 	protected $namespacePrefix = self::LOG4PHP_NS_PREFIX;
 	 
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		if ($this->getLog4jNamespace()) {
 			$this->namespace        = self::LOG4J_NS;
 			$this->namespacePrefix  = self::LOG4J_NS_PREFIX;
@@ -98,9 +98,9 @@ class LoggerLayoutXml extends LoggerLayout {
 	/**
 	 * @return string
 	 */
-	public function getHeader() {
-		return "<{$this->namespacePrefix}:eventSet ".
-			"xmlns:{$this->namespacePrefix}=\"{$this->namespace}\" ".
+	public function getHeader( ) : string {
+		return "<$this->namespacePrefix:eventSet ".
+			"xmlns:$this->namespacePrefix=\"$this->namespace\" ".
 			"version=\"0.3\" ".
 			"includesLocationInfo=\"".($this->getLocationInfo() ? "true" : "false")."\"".
 			">" . PHP_EOL;
@@ -112,7 +112,7 @@ class LoggerLayoutXml extends LoggerLayout {
 	 * @param LoggerLoggingEvent $event
 	 * @return string
 	 */
-	public function format(LoggerLoggingEvent $event) {
+	public function format( LoggerLoggingEvent $event ) : string {
 		$ns = $this->namespacePrefix;
 		
 		$loggerName = $event->getLoggerName();
@@ -120,7 +120,7 @@ class LoggerLayoutXml extends LoggerLayout {
 		$thread = $event->getThreadName();
 		$level = $event->getLevel()->toString();
 
-		$buf  = "<$ns:event logger=\"{$loggerName}\" level=\"{$level}\" thread=\"{$thread}\" timestamp=\"{$timeStamp}\">".PHP_EOL;
+		$buf  = "<$ns:event logger=\"$loggerName\" level=\"$level\" thread=\"$thread\" timestamp=\"$timeStamp\">".PHP_EOL;
 		$buf .= "<$ns:message>"; 
 		$buf .= $this->encodeCDATA($event->getRenderedMessage()); 
 		$buf .= "</$ns:message>".PHP_EOL;
@@ -159,8 +159,8 @@ class LoggerLayoutXml extends LoggerLayout {
 	/**
 	 * @return string
 	 */
-	public function getFooter() {
-		return "</{$this->namespacePrefix}:eventSet>" . PHP_EOL;
+	public function getFooter( ) : string {
+		return "</$this->namespacePrefix:eventSet>" . PHP_EOL;
 	}
 	
 	

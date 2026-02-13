@@ -32,7 +32,7 @@ class LoggerPatternConverterThrowable extends LoggerPatternConverter {
 		$info = $event->getThrowableInformation();
 		if (isset($info)) {
 			$ex = $info->getThrowable();
-			return (string) $ex . PHP_EOL;
+			return $ex . PHP_EOL;
 		}
 		return '';
 	}

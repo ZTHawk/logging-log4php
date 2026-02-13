@@ -33,14 +33,14 @@
  */
 class LoggerLevel {
 	
-	const OFF = 2147483647;
-	const FATAL = 50000;
-	const ERROR = 40000;
-	const WARN = 30000;
-	const INFO = 20000;
-	const DEBUG = 10000;
-	const TRACE = 5000;
-	const ALL = -2147483647;
+	const int OFF = 2147483647;
+	const int FATAL = 50000;
+	const int ERROR = 40000;
+	const int WARN = 30000;
+	const int INFO = 20000;
+	const int DEBUG = 10000;
+	const int TRACE = 5000;
+	const int ALL = -2147483647;
 
 	/** Integer level value. */
 	private $level;
@@ -228,29 +228,29 @@ class LoggerLevel {
 	 */
 	public static function toLevel($arg, $defaultLevel = null) {
 		if(is_int($arg)) {
-			switch($arg) {
-				case self::ALL:	return self::getLevelAll();
-				case self::TRACE: return self::getLevelTrace();
-				case self::DEBUG: return self::getLevelDebug();
-				case self::INFO: return self::getLevelInfo();
-				case self::WARN: return self::getLevelWarn();
-				case self::ERROR: return self::getLevelError();
-				case self::FATAL: return self::getLevelFatal();
-				case self::OFF:	return self::getLevelOff();
-				default: return $defaultLevel;
-			}
+			return match ($arg) {
+            	self::ALL => self::getLevelAll(),
+            	self::TRACE => self::getLevelTrace(),
+            	self::DEBUG => self::getLevelDebug(),
+            	self::INFO => self::getLevelInfo(),
+            	self::WARN => self::getLevelWarn(),
+            	self::ERROR => self::getLevelError(),
+            	self::FATAL => self::getLevelFatal(),
+            	self::OFF => self::getLevelOff(),
+            	default => $defaultLevel,
+            };
 		} else {
-			switch(strtoupper($arg)) {
-				case 'ALL':	return self::getLevelAll();
-				case 'TRACE': return self::getLevelTrace();
-				case 'DEBUG': return self::getLevelDebug();
-				case 'INFO': return self::getLevelInfo();
-				case 'WARN': return self::getLevelWarn();
-				case 'ERROR': return self::getLevelError();
-				case 'FATAL': return self::getLevelFatal();
-				case 'OFF':	return self::getLevelOff();
-				default: return $defaultLevel;
-			}
+			return match (strtoupper($arg)) {
+            	'ALL' => self::getLevelAll(),
+            	'TRACE' => self::getLevelTrace(),
+            	'DEBUG' => self::getLevelDebug(),
+            	'INFO' => self::getLevelInfo(),
+            	'WARN' => self::getLevelWarn(),
+            	'ERROR' => self::getLevelError(),
+            	'FATAL' => self::getLevelFatal(),
+            	'OFF' => self::getLevelOff(),
+            	default => $defaultLevel,
+            };
 		}
 	}
 }

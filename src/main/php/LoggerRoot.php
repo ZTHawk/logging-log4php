@@ -41,9 +41,9 @@ class LoggerRoot extends Logger {
 	} 
 	
 	/**
-	 * @return LoggerLevel the level
+	 * @return ?LoggerLevel the level
 	 */
-	public function getEffectiveLevel() {
+	public function getEffectiveLevel( ) : ?LoggerLevel {
 		return $this->getLevel();
 	}
 	
@@ -51,9 +51,9 @@ class LoggerRoot extends Logger {
 	 * Override level setter to prevent setting the root logger's level to 
 	 * null. Root logger must always have a level.
 	 * 
-	 * @param LoggerLevel $level
+	 * @param ?LoggerLevel $level
 	 */
-	public function setLevel(LoggerLevel $level = null) {
+	public function setLevel( LoggerLevel $level = null ) : void {
 		if (isset($level)) {
 			parent::setLevel($level);
 		} else {
@@ -65,7 +65,7 @@ class LoggerRoot extends Logger {
 	 * Override parent setter. Root logger cannot have a parent.
 	 * @param Logger $parent
 	 */
-	public function setParent(Logger $parent) {
+	public function setParent( Logger $parent ) : void {
 		trigger_error("log4php: LoggerRoot cannot have a parent.", E_USER_WARNING);
 	}
 }

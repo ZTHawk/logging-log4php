@@ -45,7 +45,7 @@ class LoggerLayoutSerialized extends LoggerLayout {
 		return $this->locationInfo;
 	}
 	
-	public function format(LoggerLoggingEvent $event) {
+	public function format( LoggerLoggingEvent $event ) : string {
 		// If required, initialize the location data
 		if($this->locationInfo) {
 			$event->getLocationInformation();

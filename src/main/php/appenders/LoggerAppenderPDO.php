@@ -115,7 +115,7 @@ class LoggerAppenderPDO extends LoggerAppender {
 	 * Parses the insert pattern to create a chain of converters which will be
 	 * used in forming query parameters from logging events.
 	 */
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		try {
 			$this->establishConnection();
 		} catch (PDOException $e) {
@@ -129,7 +129,7 @@ class LoggerAppenderPDO extends LoggerAppender {
 		$converterMap = LoggerLayoutPattern::getDefaultConverterMap();
 		foreach($pieces as $pattern) {
 			$parser = new LoggerPatternParser($pattern, $converterMap);
-			$this->converters[] = $parser->parse(); 
+			$this->converters[] = $parser->parse();
 		}
 		
 		$this->closed = false;
@@ -169,11 +169,11 @@ class LoggerAppenderPDO extends LoggerAppender {
 				
 				// Close the appender if it's the last attempt
 				if ($attempt > $this->reconnectAttempts) {
-					$this->warn("Failed writing to database after {$this->reconnectAttempts} reconnect attempts. Closing appender.");
+					$this->warn("Failed writing to database after $this->reconnectAttempts reconnect attempts. Closing appender.");
 					$this->close();
 				// Otherwise reconnect and try to write again
 				} else {
-					$this->warn("Attempting a reconnect (attempt $attempt of {$this->reconnectAttempts}).");
+					$this->warn("Attempting a reconnect (attempt $attempt of $this->reconnectAttempts).");
 					$this->establishConnection();
 				}
 			}
@@ -200,7 +200,7 @@ class LoggerAppenderPDO extends LoggerAppender {
 	/**
 	 * Closes the connection to the logging database
 	 */
-	public function close() {
+	public function close( ) : void {
 		// Close the connection (if any)
 		$this->db = null;
 		

@@ -30,7 +30,7 @@
 class LoggerConfigurationAdapterXML implements LoggerConfigurationAdapter
 {
 	/** Path to the XML schema used for validation. */
-	const SCHEMA_PATH = '/../xml/log4php.xsd';
+	const string SCHEMA_PATH = '/../xml/log4php.xsd';
 	
 	private $config = array(
 		'appenders' => array(),
@@ -38,8 +38,8 @@ class LoggerConfigurationAdapterXML implements LoggerConfigurationAdapter
 		'renderers' => array(),
 	);
 	
-	public function convert($url) {
-		$xml = $this->loadXML($url);
+	public function convert( $path ) {
+		$xml = $this->loadXML($path);
 		
 		$this->parseConfiguration($xml);
 
@@ -141,7 +141,10 @@ class LoggerConfigurationAdapterXML implements LoggerConfigurationAdapter
 		$this->config['appenders'][$name] = $appender;
 	}
 	
-	/** Parses a <layout> node. */
+	/**
+	 * Parses a <layout> node.
+	 * @noinspection PhpUnusedParameterInspection
+	 */
 	private function parseLayout(SimpleXMLElement $node, $appenderName) {
 		$layout = array();
 		$layout['class'] = $this->getAttributeValue($node, 'class');

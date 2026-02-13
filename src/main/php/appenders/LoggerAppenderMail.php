@@ -79,8 +79,8 @@ class LoggerAppenderMail extends LoggerAppender {
 		}
 	}
 	
-	public function close() {
-		if($this->closed != true) {
+	public function close( ) : void {
+		if( !$this->closed ) {
 			$from = $this->from;
 			$to = $this->to;
 	
@@ -90,7 +90,7 @@ class LoggerAppenderMail extends LoggerAppender {
 					mail(
 						$to, $subject, 
 						$this->layout->getHeader() . $this->body . $this->layout->getFooter(),
-						"From: {$from}\r\n");
+						"From: $from\r\n");
 				} else {
 				    echo "DRY MODE OF MAIL APP.: Send mail to: ".$to." with content: ".$this->body;
 				}

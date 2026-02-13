@@ -45,8 +45,8 @@ class LoggerAppenderEcho extends LoggerAppender {
 	 */
 	protected $htmlLineBreaks = false;
 	
-	public function close() {
-		if($this->closed != true) {
+	public function close( ) : void {
+		if( !$this->closed ) {
 			if(!$this->firstAppend) {
 				echo $this->layout->getFooter();
 			}

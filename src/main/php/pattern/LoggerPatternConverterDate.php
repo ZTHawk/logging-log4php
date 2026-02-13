@@ -34,11 +34,11 @@
  */
 class LoggerPatternConverterDate extends LoggerPatternConverter {
 
-	const DATE_FORMAT_ISO8601 = 'c';
+	const string DATE_FORMAT_ISO8601 = 'c';
 	
-	const DATE_FORMAT_ABSOLUTE = 'H:i:s';
+	const string DATE_FORMAT_ABSOLUTE = 'H:i:s';
 	
-	const DATE_FORMAT_DATE = 'd M Y H:i:s.u';
+	const string DATE_FORMAT_DATE = 'd M Y H:i:s.u';
 	
 	private $format = self::DATE_FORMAT_ISO8601;
 	
@@ -50,7 +50,7 @@ class LoggerPatternConverterDate extends LoggerPatternConverter {
 	
 	private $useLocalDate = false;
 	
-	public function activateOptions() {
+	public function activateOptions( ) : void {
 		
 		// Parse the option (date format)
 		if (!empty($this->option)) {
